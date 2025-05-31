@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AI Mentor</title>
+    <link rel="stylesheet" href="/static/homepage/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">AI Mentor</div>
+        <ul class="nav-links">
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="/static/mertorpage/flow2.html">Flow</a></li>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Career</a></li>
+            <li><a href="#" id="profileIcon"><i class="fas fa-user-circle"></i></a></li>
+        </ul>
+    </nav>
+
+    <!-- Profile Popup -->
+<div id="profilePopup" class="profile-popup">
+    <div class="profile-content">
+        <span class="close">&times;</span>
+        <img src="https://via.placeholder.com/100" alt="Profile Picture" class="profile-picture">
+        <h2 id="user-name">Loading...</h2> <!-- Placeholder for user name -->
+        <p id="user-info" class="user-info">Loading...</p> <!-- Placeholder for user role -->
+        <div class="user-stats">
+            <div class="stat">
+                <span id="progress-value" class="stat-value">--</span>
+                <span class="stat-label">Progress</span>
+            </div>
+            <div class="stat">
+                <span id="courses-value" class="stat-value">--</span>
+                <span class="stat-label">Courses</span>
+            </div>
+            <div class="stat">
+                <span id="rating-value" class="stat-value">--</span>
+                <span class="stat-label">Rating</span>
+            </div>
+        </div>
+        <a href="#" class="edit-profile-btn">Edit Profile</a>
+    </div>
+</div>
+
+    <!-- Main Banner Section -->
+    <section class="banner">
+        <div class="banner-content">
+            <h1>Your Personal AI Mentor</h1>
+            <p>Empowering your learning with the latest AI-driven insights and guidance.</p>
+            <a href="#" class="cta-button">Get Started</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="feature-box">
+            <h2>Flow Customization</h2>
+            <p>Seamlessly design and manage your learning flow with AI support.</p>
+        </div>
+        <div class="feature-box">
+            <h2>Data-Driven Dashboard</h2>
+            <p>Get insights on your progress and customize your goals.</p>
+        </div>
+        <div class="feature-box">
+            <h2>Career Guidance</h2>
+            <p>AI-powered career planning based on your skills and interests.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 AI Mentor. All Rights Reserved.</p>
+    </footer>
+
+    <script src="/static/homepage/script.js"></script>
+</body>
+</html>

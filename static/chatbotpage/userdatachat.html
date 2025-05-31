@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Data Chatbot</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(45deg, #3498db, #8e44ad);
+        }
+
+        .chat-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+            width: 800px;
+            max-width: 100%;
+            height: 600px;
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .chat-header {
+            background-color: #131416;
+            color: #ffffff;
+            padding: 20px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            text-align: center;
+        }
+
+        .chat-messages {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .bot-message {
+            background-color: #f2f2f2;
+            padding: 10px 15px;
+            border-radius: 18px;
+            max-width: 80%;
+            align-self: flex-start;
+        }
+
+        .user-message {
+            background-color: #3498db;
+            color: #ffffff;
+            padding: 10px 15px;
+            border-radius: 18px;
+            max-width: 80%;
+            align-self: flex-end;
+            margin-left: auto;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 20px;
+            background-color: #f2f2f2;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+
+        #user-input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            font-size: 16px;
+        }
+
+        #send-button {
+            background-color: #3498db;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            margin-left: 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #send-button:hover {
+            background-color: #2980b9;
+        }
+
+        .typing-indicator {
+            display: none;
+            padding: 10px 15px;
+            background-color: #f2f2f2;
+            border-radius: 18px;
+            margin-bottom: 15px;
+            align-self: flex-start;
+        }
+
+        .typing-indicator span {
+            height: 8px;
+            width: 8px;
+            background-color: #3498db;
+            display: inline-block;
+            border-radius: 50%;
+            animation: typing 1s infinite;
+            margin: 0 2px;
+        }
+
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h2>Personal Data Collection</h2>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <!-- Messages will be dynamically added here -->
+        </div>
+        <div class="typing-indicator" id="typing-indicator">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="user-input" placeholder="Type your answer here...">
+            <button id="send-button">Send</button>
+        </div>
+    </div>
+
+    <script>
+        const chatMessages = document.getElementById('chat-messages');
+        const userInput = document.getElementById('user-input');
+        const sendButton = document.getElementById('send-button');
+        const typingIndicator = document.getElementById('typing-indicator');
+
+        const userId = 'unique_user_id';  // You can dynamically generate or retrieve this
+
+        // Function to add messages to the chat
+        function addMessage(message, isUser = false) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message');
+            messageElement.classList.add(isUser ? 'user-message' : 'bot-message');
+            messageElement.textContent = message;
+            chatMessages.appendChild(messageElement);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Function to show typing indicator
+        function showTypingIndicator() {
+            typingIndicator.style.display = 'block';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Function to hide typing indicator
+        function hideTypingIndicator() {
+            typingIndicator.style.display = 'none';
+        }
+
+        // Function to handle sending messages to the backend
+        async function sendMessageToBackend(userMessage) {
+            try {
+                const response = await fetch('http://0.0.0.0:8000/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        user_id: userId,
+                        message: userMessage
+                    }),
+                });
+                const data = await response.json();
+                return data.response;
+            } catch (error) {
+                console.error('Error connecting to the backend:', error);
+                return 'Sorry, something went wrong!';
+            }
+        }
+
+        // Function to handle user input
+        async function handleUserInput() {
+            const userMessage = userInput.value.trim();
+            if (userMessage) {
+                addMessage(userMessage, true);  // Add user message to the chat
+                userInput.value = '';  // Clear input field
+
+                showTypingIndicator();  // Show typing indicator while waiting for the backend response
+
+                const botResponse = await sendMessageToBackend(userMessage);  // Send message to backend and get the response
+
+                hideTypingIndicator();  // Hide typing indicator after receiving the response
+
+                addMessage(botResponse);  // Display the bot's response
+
+                // Check if the conversation is complete and redirect to the homepage
+                if (botResponse.includes("Thank you for providing your details!")) {
+                    userInput.disabled = true;
+                    sendButton.disabled = true;
+                    setTimeout(() => {
+                        window.location.href = '/static/homepage/home.html';  // Redirect to homepage
+                    }, 2000);  // Redirect after 2 seconds
+                }
+            }
+        }
+
+        // Event listeners for sending messages
+        sendButton.addEventListener('click', handleUserInput);
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                handleUserInput();
+            }
+        });
+
+        // Start the conversation by greeting the user
+        async function startConversation() {
+            const initialBotMessage = await sendMessageToBackend("");  // Send an empty message to start the conversation
+            addMessage(initialBotMessage);
+        }
+
+        startConversation();  // Trigger the first message when the page loads
+    </script>
+</body>
+</html>

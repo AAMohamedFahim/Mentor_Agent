@@ -1,0 +1,340 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f7f8fa;
+    color: #333;
+}
+
+h3 {
+    font-weight: 600;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+/* Navigation Bar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #4A90E2;
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin-left: 1.5rem;
+}
+
+.nav-links a {
+  font-size: 1rem;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s ease;
+    border-radius: 8px;  
+}
+
+.nav-links a:hover {
+    background-color: #357ABD;
+}
+.active{ 
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    
+    border-radius: 8px;
+    background-color: #357ABD;
+
+}
+.delete-all-btn {
+    padding: 0.6rem 1rem;
+    background-color: #E94A4A;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.delete-all-btn:hover {
+    background-color: #d13b3b;
+}
+
+/* Input Section */
+.input-section {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+#topicInput {
+    padding: 1rem;
+    width: 300px;
+    font-size: 1rem;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+#topicInput:focus {
+    border-color: #4A90E2;
+}
+
+.send-btn {
+    padding: 1rem 2rem;
+    background-color: #4A90E2;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-left: 1rem;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.send-btn:hover {
+    background-color: #357ABD;
+}
+
+/* Card Container */
+.card-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin: 2rem auto;
+    max-width: 1200px;
+}
+
+/* Flowchart Card */
+.flowcard {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    padding: 1.5rem;
+    border-radius: 12px;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.flowcard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.delete-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    color: #E94A4A;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.delete-icon:hover {
+    color: #d13b3b;
+}
+
+.progress-bar {
+    margin-top: 1rem;
+    height: 8px;
+    background-color: #E6E6E6;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar .progress {
+    height: 100%;
+    width: 0;
+    background-color: #4A90E2;
+    transition: width 0.3s ease;
+}
+
+.flowcard[data-status="in-progress"] .progress {
+    width: 50%;
+}
+
+.flowcard[data-status="completed"] .progress {
+    width: 100%;
+    background-color: #28a745;
+}
+
+/* Flowchart Section */
+.flowchart-section {
+    text-align: center;
+    margin: 3rem auto;
+    padding: 2rem;
+    max-width: 900px;
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.flowchart-section:hover {
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.2);
+}
+
+#flowchartDisplay {
+    margin: 2rem auto;
+    font-size: 1.2rem;
+    background-color: #f7f8fa;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    min-height: 300px;
+}
+
+#progressDetails {
+    margin-top: 2rem;
+    text-align: left;
+    font-size: 1rem;
+}
+
+#progressDetails p {
+    margin-bottom: 0.8rem;
+}
+
+input[type="radio"] {
+    margin-left: 1rem;
+}
+
+/* Add a smooth scaling effect for the flowchart */
+#flowchartDisplay {
+    transform: scale(1);
+    transition: transform 0.3s ease;
+}
+
+#flowchartDisplay:hover {
+    transform: scale(1.05);
+}
+
+
+
+
+
+/* Chatbot Button */
+.chatbot-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #4A90E2;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 15px;
+    font-size: 2rem;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.chatbot-button:hover {
+    transform: scale(1.1);
+}
+
+/* Chatbot Popup */
+.chatbot-popup {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 50%;
+    height: 70%;
+    background-color: rgb(243, 237, 188);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border-radius: 16px 16px 0 0;
+    z-index: 1000;
+    transition: transform 0.3s ease;
+    overflow: hidden;
+}
+
+.chatbot-header {
+    background: linear-gradient(135deg, #33aedb, #8e32a5);
+    color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close-chatbot {
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.chatbot-conversation {
+    padding: 1rem;
+    overflow-y: auto;
+    height: 70%;
+}
+
+.chatbot-input-section {
+    display: flex;
+    padding: 1rem;
+    background-color: #f7f7f7;
+    border-top: 1px solid #ccc;
+}
+
+#chatbotInput {
+    flex: 1;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+}
+
+.send-chatbot-btn {
+    background-color: #4A90E2;
+    color: white;
+    border: none;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-left: 0.5rem;
+    border-radius: 8px;
+}
+
+.send-chatbot-btn:hover {
+    background-color: #357ABD;
+}
+
+.chatbot-message {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    max-width: 80%;
+}
+
+.user-message {
+    background-color: #79d5ac;
+    text-align: right;
+}
+
+.bot-message {
+    background-color: #8877e6;
+    text-align: left;
+}
